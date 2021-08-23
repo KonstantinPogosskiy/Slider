@@ -12,6 +12,35 @@ sidebar.style.top = `-${(slidesCount - 1) * 100}vh`
 upBtn.addEventListener('click', () => {
     changeSlide('up')
 })
+document.addEventListener('wheel', wheelUp)
+document.addEventListener('wheel', wheelDown)
+document.addEventListener('keydown', downW)
+
+function wheelUp(e) {
+    if (e.deltaZ) {
+        changeSlide('up')
+    }
+}
+
+function wheelDown(e) {
+    if (e.deltaY) {
+        changeSlide('down')
+    }
+}
+
+function downW(event) {
+    if (event.code === 'KeyW') {
+        changeSlide('up')
+    }
+}
+
+document.addEventListener('keydown', downS)
+
+function downS(event) {
+    if (event.code === 'KeyS') {
+        changeSlide('down')
+    }
+}
 
 downBtn.addEventListener('click', () => {
     changeSlide('down')
@@ -20,8 +49,7 @@ downBtn.addEventListener('click', () => {
 function changeSlide(direction) {
     if (direction === 'up') {
         activeSlideIndex++
-        if (activeSlideIndex === slidesCount)
-        {
+        if (activeSlideIndex === slidesCount) {
             activeSlideIndex = 0
         }
     } else if (direction === 'down') {
